@@ -2,13 +2,14 @@ const API_URL = 'https://musicbrainz.org/ws/2'
 // 5b11f4ce-a62d-471e-81fc-a69a8278c7da
 
 const inputELement = document.querySelector('#input')
-const button = document.querySelector('#button')
-const displayDataElement = document.querySelector('.display-data')
+const buttonElement = document.querySelector('#button')
+const responseDataElement = document.querySelector('.response-data')
 
 async function fetchData(url) {
     try {
         const res = await fetch(url)
         const data = await res.json()
+        console.log(data)
         return data
     } catch (error) {
         console.log(error)
@@ -35,8 +36,7 @@ async function handleClick() {
     const q = inputELement.value.trim()
     if (!q) return
     const data = await fetchData(`${API_URL}/artist/${q}?fmt=json&limit=1`)
-    console.log(data)
     renderData(data)
 }
 
-button.addEventListener('click', handleClick)
+buttonElement.addEventListener('click', handleClick)
