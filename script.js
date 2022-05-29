@@ -1,35 +1,40 @@
-// const artistinfoURL = 'https://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?fmt=json&limit=1'
-const baseURL = 'https://musicbrainz.org/ws/2/artist/'
-
-const url =
-    'https://musicbrainz.org/ws/2/url/?query=https://open.spotify.com/artist/26dSoYclwsYLMAKD3tpOr4&fmt=json&limit=1'
+const API_URL = 'https://musicbrainz.org/ws/2'
+// 5b11f4ce-a62d-471e-81fc-a69a8278c7da
 
 const inputELement = document.querySelector('#input')
 const button = document.querySelector('#button')
+const displayDataElement = document.querySelector('.display-data')
 
 async function fetchData(url) {
-    const res = await fetch(url)
-    const data = await res.json()
-    console.log(data)
-    return data
+    try {
+        const res = await fetch(url)
+        const data = await res.json()
+        return data
+    } catch (error) {
+        console.log(error)
+    }
 }
-button.addEventListener('click', async () => {
-    const data = await fetchData(baseURL + inputELement.value + '?fmt=json&limit=1')
-    renderData(data)
-})
 
 function renderData(data) {
+    displayDataElement.innerHTML = ''
+    if (data.error) return displayDataElement.insertAdjacentText('afterbegin', data.error)
+
     const markup = `
-    <div>${data.country} </div>
-    <div>${data.name} </div>
-    <div>${data.type} </div>
-    <div>${data.country} </div>
-    <div>${data.country} </div>
-    <div>${data.country} </div>
+    <p>Country: ${data.area.name}</p>
+    <p>type: ${data.type}</p>
+    <p>Name: ${data.name}</p>
+    <p>Disambiguation: ${data.disambiguation}</p>
+    <p>Disambiguation: ${data['life-span'].begin} - ${data['life-span'].end}</p>
     `
-    const element = document.querySelector('.responseData')
-    element.insertAdjacentHTML('afterbegin', markup)
+    displayDataElement.insertAdjacentHTML('afterbegin', markup)
 }
 
-// const data = await fetchData(artistinfoURL)
-// renderData(data)
+async function handleClick() {
+    const q = inputELement.value
+    if (!q) return
+    const data = await fetchData(`${API_URL}/artist/${q}?fmt=json&limit=1`)
+    console.log(data)
+    renderData(data)
+}
+
+button.addEventListener('click', handleClick)
