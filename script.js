@@ -1,5 +1,4 @@
 const API_URL = 'https://musicbrainz.org/ws/2'
-// 5b11f4ce-a62d-471e-81fc-a69a8278c7da
 
 const inputELement = document.querySelector('#input')
 const buttonElement = document.querySelector('#button')
@@ -17,18 +16,18 @@ async function fetchData(url) {
 }
 
 function renderData(data) {
-    displayDataElement.innerHTML = ''
+    responseDataElement.innerHTML = ''
     if (data.error)
-        return displayDataElement.insertAdjacentText('afterbegin', data.error)
+        return responseDataElement.insertAdjacentText('afterbegin', data.error)
 
     const markup = `
     <p>Name: <strong>${data.name}</strong></p>
-    <p>type:  <strong>${data.type}</strong></p>
+    <p>Type:  <strong>${data.type}</strong></p>
     <p>Disambiguation: <strong>${data.disambiguation}</strong></p>
     <p>Country:  <strong>${data.area.name}</strong></p>
     <p>Life span: From <strong>${data['life-span'].begin}</strong> to <strong>${data['life-span'].end}</strong></p>
     `
-    displayDataElement.insertAdjacentHTML('afterbegin', markup)
+    responseDataElement.insertAdjacentHTML('afterbegin', markup)
     inputELement.value = ''
 }
 
