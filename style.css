@@ -5,15 +5,18 @@
 html {
     font-family: Arial, Helvetica, sans-serif;
     font-size: larger;
+    word-break: break-word;
     line-height: 1.5;
 }
 
 body {
-    margin: 0 auto;
     min-height: 100vh;
-    display: grid;
-    place-content: center;
+}
+
+.content {
+    margin: 0 auto;
     max-width: 50rem;
+    padding: 1rem;
 }
 
 input,
@@ -23,10 +26,20 @@ button {
     flex-grow: 1;
 }
 
-.search-container {
-    display: flex;
+button {
+    max-width: 8rem;
 }
 
 .example {
     color: #aaaaaa;
+}
+
+.search-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.artist-info {
+    max-width: fit-content;
 }
