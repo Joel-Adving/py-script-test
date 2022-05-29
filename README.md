@@ -1,4 +1,4 @@
 ## py-script-test
-Python in the browser with py-script thanks to WebAssembly
+Running python in the browser thanks to PyScript and WebAssembly
 
 Also is my first time programming in python
