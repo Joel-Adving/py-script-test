@@ -21,7 +21,6 @@ button {
     padding: 0.25rem;
     font-size: larger;
     flex-grow: 1;
-    min-width: 0;
 }
 
 .search-container {

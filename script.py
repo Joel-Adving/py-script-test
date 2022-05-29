@@ -29,7 +29,6 @@ async def get_artist(e):
     query_artist = "https://musicbrainz.org/ws/2/artist/" + mbid + "?inc=url-rels+aliases+genres&fmt=json&limit=1"
     artist_data = await fetch(query_artist)
 
-    #BREAK IF ARTIST IS NOT FOUND ELSE CONTINUE
     if artist_data["name"] == "Frederick Westcott":
         return responseDataElement.insertAdjacentHTML('afterbegin', "Artist not found")
 
@@ -49,7 +48,6 @@ async def get_artist(e):
         url = i['url']
         artist_resource.append(url['resource'])
 
-    #PRINT ARTIST DATA
     markup = []
     markup.append('<p>Name: %s</p>' % artist_data['name'])
     markup.append('<p>Disambiguation: %s</p>' % artist_data['disambiguation'])
