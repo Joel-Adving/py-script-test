@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: larger;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+}
+
+input,
+button {
+    padding: 0.25rem;
+    font-size: larger;
+    flex-grow: 1;
+}
+
+.search-container {
+    display: flex;
+}
+
+.example {
+    color: rgb(170, 170, 170);
+}

@@ -17,20 +17,22 @@ async function fetchData(url) {
 
 function renderData(data) {
     displayDataElement.innerHTML = ''
-    if (data.error) return displayDataElement.insertAdjacentText('afterbegin', data.error)
+    if (data.error)
+        return displayDataElement.insertAdjacentText('afterbegin', data.error)
 
     const markup = `
-    <p>Country: ${data.area.name}</p>
-    <p>type: ${data.type}</p>
-    <p>Name: ${data.name}</p>
-    <p>Disambiguation: ${data.disambiguation}</p>
-    <p>Disambiguation: ${data['life-span'].begin} - ${data['life-span'].end}</p>
+    <p>Name: <strong>${data.name}</strong></p>
+    <p>type:  <strong>${data.type}</strong></p>
+    <p>Disambiguation: <strong>${data.disambiguation}</strong></p>
+    <p>Country:  <strong>${data.area.name}</strong></p>
+    <p>Life span: From <strong>${data['life-span'].begin}</strong> to <strong>${data['life-span'].end}</strong></p>
     `
     displayDataElement.insertAdjacentHTML('afterbegin', markup)
+    inputELement.value = ''
 }
 
 async function handleClick() {
-    const q = inputELement.value
+    const q = inputELement.value.trim()
     if (!q) return
     const data = await fetchData(`${API_URL}/artist/${q}?fmt=json&limit=1`)
     console.log(data)
